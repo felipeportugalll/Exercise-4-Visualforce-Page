@@ -19,8 +19,11 @@ A Search by Contact Name should also be available for the Contact list;
 4.   Create a "Set Primary Contact" custom button that will redirect the user to the Visualforce page and add it to the Account Layout.
 
 ![Button redirection on classic](https://github.com/felipeportugalll/Visualforce-Page/assets/108902942/64c481b2-82a4-4eb1-a753-fff140188d8b)
+
 ![Button on lightning](https://github.com/felipeportugalll/Visualforce-Page/assets/108902942/f8af91b5-e397-476b-a894-5cb5b2f8e852)
+
 ![Set primary contact on lightning page ](https://github.com/felipeportugalll/Visualforce-Page/assets/108902942/3577e21e-ab4f-4f71-ba6c-b683d11edd75)
+
 ![Set primary contact on classic](https://github.com/felipeportugalll/Visualforce-Page/assets/108902942/c5c99e88-5ac6-45d4-95b5-6a7013d804a6)
 
-Custom field Is Priary Contact (checkbox) can be seen in exercise 1 apex triggers
+Custom field Is Primary Contact (checkbox) can be seen in exercise 1 apex triggers
