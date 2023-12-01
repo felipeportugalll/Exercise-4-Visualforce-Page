@@ -1,0 +1,52 @@
+public with sharing class AccountWithContactsController {
+    public Account account { get; private set; }
+    public String contactNameFilter { get; set; }
+    public List<ContactWrapper> relatedContacts { get; private set; }
+    public Boolean displayConfirmationPopup { get; private set; }
+    public String selectedContactId { get; set; }
+    public String confirmSetAsPrimaryUrl { get; private set; }
+
+    public AccountWithContactsController(ApexPages.StandardController stdController) {
+        this.account = (Account)stdController.getRecord();
+        this.relatedContacts = new List<ContactWrapper>();
+        this.contactNameFilter = '';
+        this.displayConfirmationPopup = false;
+        this.selectedContactId = null;
+        this.confirmSetAsPrimaryUrl = '';
+        this.loadRelatedContacts();
+    }
+
+public void loadRelatedContacts() {
+    String query = 'SELECT Id, Name, Title, Phone, Is_Primary_Contact__c FROM Contact WHERE AccountId = :account.Id';
+
+    if (String.isNotBlank(contactNameFilter)) {
+        query += ' AND Name LIKE \'%' + String.escapeSingleQuotes(contactNameFilter) + '%\'';
+    }
+
+    List<Contact> contacts = Database.query(query);
+
+    relatedContacts = new List<ContactWrapper>();
+    for (Contact c : contacts) {
+        relatedContacts.add(new ContactWrapper(c));
+    }
+}
+
+    public void searchContacts() {
+        loadRelatedContacts();
+    }
+
+    public void setAsPrimary() {
+        displayConfirmationPopup = true;
+        confirmSetAsPrimaryUrl = '/apex/AccountWithContactsPage?id=' + selectedContactId;
+    }
+
+    public class ContactWrapper {
+        public Contact contact { get; set; }
+        public Boolean isPrimary { get; set; }
+
+        public ContactWrapper(Contact c) {
+            this.contact = c;
+            this.isPrimary = c.Is_Primary_Contact__c; 
+        }
+    }
+}
